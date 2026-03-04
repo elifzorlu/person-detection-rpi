@@ -1,6 +1,7 @@
 .DS_Store
 trained_models/
 vw_coco2014_96/
+vw_coco2014_96.tar.gz
 __pycache__/
 *.pyc
 *.h5

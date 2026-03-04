@@ -1,0 +1,13 @@
+{
+    "model_name": "model.tflite",
+    "split": "test_public",
+    "accuracy": 0.8291370187921913,
+    "size_mb": 0.1933135986328125,
+    "macs_m": 4.456032,
+    "latency_p50_ms": 1.9593355245888233,
+    "latency_p90_ms": 2.885128650814295,
+    "latency_p99_ms": 7.829101989045696,
+    "threads": 1,
+    "created_at": "Tue Mar  3 21:18:56 2026",
+    "score": 1.0388022651359299
+}

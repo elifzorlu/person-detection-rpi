@@ -21,7 +21,7 @@ def mobilenet_v1():
     # Mobilenet parameters
     input_shape = [96,96,3] # resized to 96x96 per EEMBC requirement
     num_classes = 2 # person and non-person
-    num_filters = 8 # normally 32, but running with alpha=.25 per EEMBC requirement
+    num_filters = 6 # alpha≈0.19, protected size bonus + label smoothing for accuracy
 
     inputs = Input(shape=input_shape)
     x = inputs # Keras model uses ZeroPadding2D()
@@ -35,7 +35,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x) # Keras uses ReLU6 instead of pure ReLU
+    x = Activation('relu6')(x)
 
     # 2nd layer, depthwise separable conv
     # Filter size is always doubled before the pointwise conv
@@ -46,7 +46,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     num_filters = 2*num_filters
     x = Conv2D(num_filters,
@@ -56,7 +56,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 3rd layer, depthwise separable conv
     x = DepthwiseConv2D(kernel_size=3,
@@ -65,7 +65,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     num_filters = 2*num_filters
     x = Conv2D(num_filters,
@@ -75,7 +75,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 4th layer, depthwise separable conv
     x = DepthwiseConv2D(kernel_size=3,
@@ -84,7 +84,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     x = Conv2D(num_filters,
                   kernel_size=1,
@@ -93,7 +93,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 5th layer, depthwise separable conv
     x = DepthwiseConv2D(kernel_size=3,
@@ -102,7 +102,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     num_filters = 2*num_filters
     x = Conv2D(num_filters,
@@ -112,7 +112,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 6th layer, depthwise separable conv
     x = DepthwiseConv2D(kernel_size=3,
@@ -121,7 +121,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     x = Conv2D(num_filters,
                   kernel_size=1,
@@ -130,7 +130,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 7th layer, depthwise separable conv
     x = DepthwiseConv2D(kernel_size=3,
@@ -139,7 +139,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     num_filters = 2*num_filters
     x = Conv2D(num_filters,
@@ -149,7 +149,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 8th-12th layers, identical depthwise separable convs
     # 8th
@@ -159,7 +159,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     x = Conv2D(num_filters,
                   kernel_size=1,
@@ -168,7 +168,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 9th
     x = DepthwiseConv2D(kernel_size=3,
@@ -177,7 +177,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     x = Conv2D(num_filters,
                   kernel_size=1,
@@ -186,7 +186,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 10th
     x = DepthwiseConv2D(kernel_size=3,
@@ -195,7 +195,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     x = Conv2D(num_filters,
                   kernel_size=1,
@@ -204,7 +204,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 11th
     x = DepthwiseConv2D(kernel_size=3,
@@ -213,7 +213,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     x = Conv2D(num_filters,
                   kernel_size=1,
@@ -222,7 +222,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 12th
     x = DepthwiseConv2D(kernel_size=3,
@@ -231,7 +231,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     x = Conv2D(num_filters,
                   kernel_size=1,
@@ -240,7 +240,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 13th layer, depthwise separable conv
     x = DepthwiseConv2D(kernel_size=3,
@@ -249,7 +249,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     num_filters = 2*num_filters
     x = Conv2D(num_filters,
@@ -259,7 +259,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # 14th layer, depthwise separable conv
     x = DepthwiseConv2D(kernel_size=3,
@@ -268,7 +268,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     x = Conv2D(num_filters,
                   kernel_size=1,
@@ -277,7 +277,7 @@ def mobilenet_v1():
                   kernel_initializer='he_normal',
                   kernel_regularizer=l2(1e-4))(x)
     x = BatchNormalization()(x)
-    x = Activation('relu')(x)
+    x = Activation('relu6')(x)
 
     # Average pooling, max polling may be used also
     # Keras employs GlobalAveragePooling2D 

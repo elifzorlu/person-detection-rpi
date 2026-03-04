@@ -1,0 +1,13 @@
+{
+    "model_name": "vww_96_warmdistill2_int8.tflite",
+    "split": "test_public",
+    "accuracy": 0.8293194672505018,
+    "size_mb": 0.19324493408203125,
+    "macs_m": 4.456032,
+    "latency_p50_ms": 3.0903680017217994,
+    "latency_p90_ms": 3.3404078101739287,
+    "latency_p99_ms": 6.103372799698248,
+    "threads": 1,
+    "created_at": "Sun Mar  1 01:07:31 2026",
+    "score": 1.039030999938941
+}

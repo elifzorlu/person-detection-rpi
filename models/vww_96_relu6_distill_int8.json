@@ -1,0 +1,42 @@
+{
+  "model_file": "vww_96_relu6_distill_int8.tflite",
+  "model_size_mb": 0.1933135986328125,
+  "eval_mode": "manifest:test_public",
+  "device": {
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "python": "3.11.14",
+    "machine": "x86_64",
+    "cpu_model": "INTEL(R) XEON(R) GOLD 6548Y+"
+  },
+  "timestamp": "Sun Mar  1 04:11:46 2026",
+  "accuracy": 0.8295019157088123,
+  "correct": 9093,
+  "total": 10962,
+  "latency_total_ms": {
+    "mean": 3.8342932767595306,
+    "p50": 3.658893,
+    "p90": 3.9095894999999996,
+    "p99": 9.267596799999989,
+    "min": 3.261458,
+    "max": 15.373139
+  },
+  "latency_preprocess_ms": {
+    "mean": 2.2656281342558655,
+    "p50": 2.1149145000000003,
+    "p90": 2.337853,
+    "p99": 7.147740649999997
+  },
+  "latency_infer_ms": {
+    "mean": 1.5686651425036655,
+    "p50": 1.540639,
+    "p90": 1.5854784,
+    "p99": 2.431431889999997
+  },
+  "peak_rss_mb": 43.0703125,
+  "threads": 1,
+  "warmup_images": 50,
+  "rss_sample_every": 10,
+  "macs_m": 4.456,
+  "macs_source": "command-line flag",
+  "score": 1.0391671940525509
+}
